@@ -67,7 +67,7 @@
   </footer>
 
   <script>
-    fetch('https://banket-schastie.onrender.com/api/reviews')
+    fetch('/api/reviews')
       .then(r => r.json())
       .then(data => {
         const slider = document.getElementById('reviewsSlider');

@@ -48,7 +48,7 @@
   </section>
 
   <script>
-    fetch('https://banket-schastie.onrender.com/api/services')
+    fetch('/api/services')
       .then(r => r.json())
       .then(data => {
         const grid = document.getElementById('servicesGrid');

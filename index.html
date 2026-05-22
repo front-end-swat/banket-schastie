@@ -220,7 +220,7 @@
   <button class="scroll-top" id="scrollTop" aria-label="Наверх">&#8593;</button>
 
   <script>
-    fetch('https://banket-schastie.onrender.com/api/services')
+    fetch('/api/services')
       .then(r => r.json())
       .then(data => {
         const grid = document.getElementById('servicesGrid');
@@ -241,7 +241,7 @@
         }).join('');
       });
 
-    fetch('https://banket-schastie.onrender.com/api/reviews')
+    fetch('/api/reviews')
       .then(r => r.json())
       .then(data => {
         const slider = document.getElementById('reviewsSlider');
