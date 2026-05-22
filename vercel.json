@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/*.js": {
+      "excludeFiles": "{node_modules/**}"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/backend/api/$1" }
+  ]
+}
