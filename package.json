@@ -1,5 +1,5 @@
 {
-  "type": "module",
+
   "scripts": {
     "start": "cd backend && node server.js",
     "backend": "cd backend && node server.js",
