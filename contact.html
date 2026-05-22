@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты — Банкетный зал «Счастье»</title>
+  <meta name="description" content="Контакты банкетного зала «Счастье». Забронируйте зал по телефону, через форму или мессенджеры.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">
+          <span class="logo__icon">&#9825;</span>
+          <span class="logo__text">Счастье</span>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="about.html" class="nav__link">О нас</a>
+          <a href="services.html" class="nav__link">Услуги</a>
+          <a href="gallery.html" class="nav__link">Фото</a>
+          <a href="tour.html" class="nav__link">3D-тур</a>
+          <a href="reviews.html" class="nav__link">Отзывы</a>
+          <a href="contact.html" class="nav__link">Контакты</a>
+        </nav>
+        <button class="burger" id="burger" aria-label="Открыть меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Контакты</h1>
+      <p class="page-hero__subtitle">Свяжитесь с нами для бронирования</p>
+    </div>
+  </section>
+
+  <section class="section contact">
+    <div class="container">
+      <div class="contact__grid">
+        <div class="contact__info">
+          <div class="contact__item">
+            <div class="contact__icon">&#128205;</div>
+            <div>
+              <h4>Адрес</h4>
+              <p>г. Москва, ул. Праздничная, д. 15</p>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#128222;</div>
+            <div>
+              <h4>Телефон</h4>
+              <a href="tel:+74951234567" class="contact__link">+7 (495) 123-45-67</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#9993;</div>
+            <div>
+              <h4>Email</h4>
+              <a href="mailto:info@schastie.ru" class="contact__link">info@schastie.ru</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#128242;</div>
+            <div>
+              <h4>Мессенджеры</h4>
+              <div class="contact__social">
+                <a href="#" class="contact__social-link" aria-label="WhatsApp">WA</a>
+                <a href="#" class="contact__social-link" aria-label="Telegram">TG</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#128197;</div>
+            <div>
+              <h4>Часы работы</h4>
+              <p>Ежедневно с 10:00 до 23:00</p>
+            </div>
+          </div>
+        </div>
+        <form class="contact__form" id="contactForm">
+          <h3>Забронировать зал</h3>
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="tel" name="phone" placeholder="Телефон" required>
+          <input type="email" name="email" placeholder="Email">
+          <input type="date" name="date">
+          <select name="guests">
+            <option value="">Количество гостей</option>
+            <option value="10-20">10-20</option>
+            <option value="20-50">20-50</option>
+            <option value="50-100">50-100</option>
+            <option value="100+">100+</option>
+          </select>
+          <textarea name="message" placeholder="Дополнительные пожелания" rows="4"></textarea>
+          <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+          <p class="contact__privacy">Отправляя форму, вы соглашаетесь с политикой обработки данных</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-map">
+    <iframe class="map" src="https://yandex.ru/map-widget/v1/?ll=37.617698%2C55.755864&z=15&l=map&pt=37.617698%2C55.755864%2Cpm2rdl" loading="lazy"></iframe>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo">Банкетный зал «Счастье»</span>
+          <p class="footer__copy">&copy; 2026 Все права защищены</p>
+        </div>
+        <nav class="footer__nav">
+          <a href="about.html">О нас</a>
+          <a href="services.html">Услуги</a>
+          <a href="gallery.html">Фото</a>
+          <a href="tour.html">3D-тур</a>
+          <a href="reviews.html">Отзывы</a>
+          <a href="contact.html">Контакты</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="js/form.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

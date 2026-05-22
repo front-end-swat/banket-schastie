@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Банкетный зал «Счастье» — Идеальное место для вашего торжества</title>
+  <meta name="description" content="Банкетный зал «Счастье» в Москве. До 200 гостей, авторская кухня, 3D-тур, фотогалерея. Забронируйте зал для свадьбы, корпоратива или дня рождения.">
+  <meta property="og:title" content="Банкетный зал «Счастье»">
+  <meta property="og:description" content="Идеальное место для вашего незабываемого торжества">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://banket-schastie.ru">
+  <meta property="og:image" content="images/og-image.jpg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">
+          <span class="logo__icon">&#9825;</span>
+          <span class="logo__text">Счастье</span>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="index.html" class="nav__link">Главная</a>
+          <a href="services.html" class="nav__link">Услуги</a>
+          <a href="gallery.html" class="nav__link">Фото</a>
+          <a href="tour.html" class="nav__link">3D-тур</a>
+          <a href="reviews.html" class="nav__link">Отзывы</a>
+          <a href="contact.html" class="nav__link">Контакты</a>
+        </nav>
+        <button class="burger" id="burger" aria-label="Открыть меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__bg"></div>
+    <div class="hero__particles" id="particles"></div>
+    <div class="container">
+      <div class="hero__content">
+        <h1 class="hero__title">Банкетный зал «Счастье»</h1>
+        <p class="hero__subtitle">Идеальное место для вашего незабываемого торжества</p>
+        <div class="hero__actions">
+          <a href="contact.html" class="btn btn--primary">Забронировать</a>
+          <a href="tour.html" class="btn btn--outline">Виртуальный тур</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Почему «Счастье»</h2>
+        <p class="section__subtitle">Всё для вашего идеального праздника</p>
+      </div>
+      <div class="about__grid">
+        <div class="about__item">
+          <div class="about__icon">&#127881;</div>
+          <h3 class="about__title">До 200 гостей</h3>
+          <p class="about__text">Просторный зал, разделённый на зоны для танцев и банкета</p>
+        </div>
+        <div class="about__item">
+          <div class="about__icon">&#127860;</div>
+          <h3 class="about__title">Авторская кухня</h3>
+          <p class="about__text">Изысканное меню от шеф-повара с европейскими и национальными блюдами</p>
+        </div>
+        <div class="about__item">
+          <div class="about__icon">&#127912;</div>
+          <h3 class="about__title">Дизайнерский интерьер</h3>
+          <p class="about__text">Современный стиль, светодизайн, фотозона — всё для ваших фото</p>
+        </div>
+        <div class="about__item">
+          <div class="about__icon">&#127908;</div>
+          <h3 class="about__title">Полное оснащение</h3>
+          <p class="about__text">Профессиональный звук, свет, сцена, проектор и караоке</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Наши услуги</h2>
+        <p class="section__subtitle">Выберите подходящий пакет</p>
+      </div>
+      <div class="services__grid" id="servicesGrid"></div>
+      <div class="section__more">
+        <a href="services.html" class="btn btn--outline">Все услуги и цены</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Фотогалерея</h2>
+        <p class="section__subtitle">Посмотрите, как проходят наши мероприятия</p>
+      </div>
+      <div class="gallery__grid gallery__grid--compact" id="galleryGrid"></div>
+      <div class="section__more">
+        <a href="gallery.html" class="btn btn--outline">Смотреть все фото</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tour-preview" id="tour">
+    <div class="container">
+      <div class="tour-preview__content">
+        <h2 class="tour-preview__title">Виртуальный 3D-тур</h2>
+        <p class="tour-preview__text">Осмотрите зал, не выходя из дома. Полное погружение с эффектом присутствия.</p>
+        <a href="tour.html" class="btn btn--primary">Запустить 3D-тур</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reviews" id="reviews">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Отзывы</h2>
+        <p class="section__subtitle">Что говорят наши гости</p>
+      </div>
+      <div class="reviews__slider" id="reviewsSlider"></div>
+      <div class="section__more">
+        <a href="reviews.html" class="btn btn--outline">Все отзывы</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">Свяжитесь с нами</h2>
+        <p class="section__subtitle">Ответим на все вопросы и поможем с бронированием</p>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info">
+          <div class="contact__item">
+            <div class="contact__icon">&#128205;</div>
+            <div>
+              <h4>Адрес</h4>
+              <p>г. Москва, ул. Праздничная, д. 15</p>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#128222;</div>
+            <div>
+              <h4>Телефон</h4>
+              <a href="tel:+74951234567" class="contact__link">+7 (495) 123-45-67</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#128242;</div>
+            <div>
+              <h4>Мессенджеры</h4>
+              <div class="contact__social">
+                <a href="#" class="contact__social-link" aria-label="WhatsApp">WA</a>
+                <a href="#" class="contact__social-link" aria-label="Telegram">TG</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__icon">&#128197;</div>
+            <div>
+              <h4>Часы работы</h4>
+              <p>Ежедневно с 10:00 до 23:00</p>
+            </div>
+          </div>
+        </div>
+        <form class="contact__form" id="contactForm">
+          <h3>Забронировать зал</h3>
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="tel" name="phone" placeholder="Телефон" required>
+          <input type="email" name="email" placeholder="Email">
+          <input type="date" name="date">
+          <select name="guests">
+            <option value="">Количество гостей</option>
+            <option value="10-20">10-20</option>
+            <option value="20-50">20-50</option>
+            <option value="50-100">50-100</option>
+            <option value="100+">100+</option>
+          </select>
+          <textarea name="message" placeholder="Дополнительные пожелания" rows="4"></textarea>
+          <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+          <p class="contact__privacy">Отправляя форму, вы соглашаетесь с политикой обработки данных</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo">Банкетный зал «Счастье»</span>
+          <p class="footer__copy">&copy; 2026 Все права защищены</p>
+        </div>
+        <nav class="footer__nav">
+          <a href="about.html">О нас</a>
+          <a href="services.html">Услуги</a>
+          <a href="gallery.html">Фото</a>
+          <a href="tour.html">3D-тур</a>
+          <a href="reviews.html">Отзывы</a>
+          <a href="contact.html">Контакты</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <button class="scroll-top" id="scrollTop" aria-label="Наверх">&#8593;</button>
+
+  <script>
+    fetch('http://localhost:3001/api/services')
+      .then(r => r.json())
+      .then(data => {
+        const grid = document.getElementById('servicesGrid');
+        grid.innerHTML = data.map(s => {
+          const features = JSON.parse(s.features || '[]');
+          const featured = s.is_featured ? 'service-card--featured' : '';
+          const btnClass = s.is_featured ? 'btn--primary' : 'btn--outline';
+          return `
+            <div class="service-card ${featured}">
+              <div class="service-card__badge">${s.badge}</div>
+              <div class="service-card__price">от ${s.price.toLocaleString()} ₽<span>/чел</span></div>
+              <ul class="service-card__list">
+                ${features.slice(0, 4).map(f => `<li>${f}</li>`).join('')}
+              </ul>
+              <a href="contact.html" class="btn ${btnClass}">Забронировать</a>
+            </div>
+          `;
+        }).join('');
+      });
+
+    fetch('http://localhost:3001/api/reviews')
+      .then(r => r.json())
+      .then(data => {
+        const slider = document.getElementById('reviewsSlider');
+        slider.innerHTML = data.slice(0, 3).map(r => `
+          <div class="review-card">
+            <div class="review-card__stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+            <p class="review-card__text">«${r.text}»</p>
+            <div class="review-card__author">
+              <strong>${r.author}</strong>
+              ${r.event ? `<span>${r.event}</span>` : ''}
+            </div>
+          </div>
+        `).join('');
+      });
+  </script>
+  <script src="js/form.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

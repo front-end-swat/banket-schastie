@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Услуги и цены — Банкетный зал «Счастье»</title>
+  <meta name="description" content="Пакеты услуг банкетного зала «Счастье» — Базовый, Популярный и Премиум. Выберите подходящий вариант для вашего торжества.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">
+          <span class="logo__icon">&#9825;</span>
+          <span class="logo__text">Счастье</span>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="about.html" class="nav__link">О нас</a>
+          <a href="services.html" class="nav__link">Услуги</a>
+          <a href="gallery.html" class="nav__link">Фото</a>
+          <a href="tour.html" class="nav__link">3D-тур</a>
+          <a href="reviews.html" class="nav__link">Отзывы</a>
+          <a href="contact.html" class="nav__link">Контакты</a>
+        </nav>
+        <button class="burger" id="burger" aria-label="Открыть меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Наши услуги</h1>
+      <p class="page-hero__subtitle">Выберите подходящий пакет для вашего мероприятия</p>
+    </div>
+  </section>
+
+  <section class="section services">
+    <div class="container">
+      <div class="services__grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <script>
+    fetch('http://localhost:3001/api/services')
+      .then(r => r.json())
+      .then(data => {
+        const grid = document.getElementById('servicesGrid');
+        grid.innerHTML = data.map(s => {
+          const features = JSON.parse(s.features || '[]');
+          const featured = s.is_featured ? 'service-card--featured' : '';
+          const btnClass = s.is_featured ? 'btn--primary' : 'btn--outline';
+          return `
+            <div class="service-card ${featured}">
+              <div class="service-card__badge">${s.badge}</div>
+              <div class="service-card__price">от ${s.price.toLocaleString()} ₽<span>/чел</span></div>
+              <ul class="service-card__list">
+                ${features.map(f => `<li>${f}</li>`).join('')}
+              </ul>
+              <a href="contact.html" class="btn ${btnClass}">Забронировать</a>
+            </div>
+          `;
+        }).join('');
+      });
+  </script>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo">Банкетный зал «Счастье»</span>
+          <p class="footer__copy">&copy; 2026 Все права защищены</p>
+        </div>
+        <nav class="footer__nav">
+          <a href="about.html">О нас</a>
+          <a href="services.html">Услуги</a>
+          <a href="gallery.html">Фото</a>
+          <a href="tour.html">3D-тур</a>
+          <a href="reviews.html">Отзывы</a>
+          <a href="contact.html">Контакты</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

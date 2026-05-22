@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Фотогалерея — Банкетный зал «Счастье»</title>
+  <meta name="description" content="Фотогалерея банкетного зала «Счастье» — интерьер, оформление, проведение мероприятий.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo">
+          <span class="logo__icon">&#9825;</span>
+          <span class="logo__text">Счастье</span>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="about.html" class="nav__link">О нас</a>
+          <a href="services.html" class="nav__link">Услуги</a>
+          <a href="gallery.html" class="nav__link">Фото</a>
+          <a href="tour.html" class="nav__link">3D-тур</a>
+          <a href="reviews.html" class="nav__link">Отзывы</a>
+          <a href="contact.html" class="nav__link">Контакты</a>
+        </nav>
+        <button class="burger" id="burger" aria-label="Открыть меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Фотогалерея</h1>
+      <p class="page-hero__subtitle">Посмотрите, как проходят наши мероприятия</p>
+    </div>
+  </section>
+
+  <section class="section gallery">
+    <div class="container">
+      <div class="gallery-filters" id="galleryFilters">
+        <button class="gallery-filter active" data-filter="all">Все</button>
+        <button class="gallery-filter" data-filter="interior">Интерьер</button>
+        <button class="gallery-filter" data-filter="wedding">Свадьба</button>
+        <button class="gallery-filter" data-filter="decor">Декор</button>
+      </div>
+      <div class="gallery__grid" id="galleryGrid">
+        <div class="gallery__item gallery__item--wide" data-category="interior">
+          <img src="images/gallery/img-1.jpg" alt="Интерьер зала">
+        </div>
+        <div class="gallery__item" data-category="decor">
+          <img src="images/gallery/img-2.jpg" alt="Оформление стола">
+        </div>
+        <div class="gallery__item" data-category="wedding">
+          <img src="images/gallery/img-3.jpg" alt="Торжество">
+        </div>
+        <div class="gallery__item" data-category="decor">
+          <img src="images/gallery/img-4.jpg" alt="Фотозона">
+        </div>
+        <div class="gallery__item gallery__item--wide" data-category="wedding">
+          <img src="images/gallery/img-5.jpg" alt="Свадьба">
+        </div>
+        <div class="gallery__item" data-category="decor">
+          <img src="images/gallery/img-6.jpg" alt="Банкет">
+        </div>
+        <div class="gallery__item" data-category="decor">
+          <img src="images/gallery/img-7.jpg" alt="Декор">
+        </div>
+        <div class="gallery__item gallery__item--wide" data-category="interior">
+          <img src="images/gallery/img-8.jpg" alt="Вечернее освещение">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo">Банкетный зал «Счастье»</span>
+          <p class="footer__copy">&copy; 2026 Все права защищены</p>
+        </div>
+        <nav class="footer__nav">
+          <a href="about.html">О нас</a>
+          <a href="services.html">Услуги</a>
+          <a href="gallery.html">Фото</a>
+          <a href="tour.html">3D-тур</a>
+          <a href="reviews.html">Отзывы</a>
+          <a href="contact.html">Контакты</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

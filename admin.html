@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ-панель — Банкетный зал «Счастье»</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #f0ede8; font-family: 'Montserrat', sans-serif; }
+    .admin-login {
+      max-width: 400px; margin: 100px auto; background: #fff; padding: 40px;
+      border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); text-align: center;
+    }
+    .admin-login h1 { font-size: 1.5rem; margin-bottom: 25px; }
+    .admin-login input {
+      width: 100%; padding: 14px 16px; margin-bottom: 12px; border: 1px solid #ddd;
+      border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;
+    }
+    .admin-login .error { color: #c0392b; font-size: 0.85rem; margin-bottom: 10px; }
+    .admin-panel { display: none; max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+    .admin-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 30px; background: #1a1a1a; color: #fff; padding: 15px 25px;
+      border-radius: 10px;
+    }
+    .admin-header h1 { font-size: 1.3rem; }
+    .admin-header button { background: none; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 20px; border-radius: 6px; cursor: pointer; }
+    .admin-header button:hover { border-color: #c9a84c; color: #c9a84c; }
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+    .admin-tab {
+      padding: 10px 25px; border: none; background: #fff; border-radius: 8px;
+      cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .admin-tab:hover { background: #f5f0e8; }
+    .admin-tab.active { background: #c9a84c; color: #fff; }
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+    .admin-card {
+      background: #fff; border-radius: 10px; padding: 20px; margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex;
+      justify-content: space-between; align-items: flex-start; gap: 15px;
+    }
+    .admin-card__info { flex: 1; }
+    .admin-card__info h3 { font-size: 1rem; margin-bottom: 4px; }
+    .admin-card__info p { color: #666; font-size: 0.85rem; margin-bottom: 2px; }
+    .admin-card__info .date { color: #999; font-size: 0.75rem; }
+    .admin-card__actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn-danger { background: #c0392b; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+    .btn-danger:hover { background: #a93226; }
+    .btn-edit { background: #2980b9; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+    .btn-add {
+      background: #c9a84c; color: #fff; border: none; padding: 10px 25px;
+      border-radius: 8px; cursor: pointer; font-weight: 500; margin-bottom: 20px;
+    }
+    .btn-add:hover { background: #b8952e; }
+    .modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      align-items: center; justify-content: center; z-index: 9999;
+    }
+    .modal.open { display: flex; }
+    .modal__content {
+      background: #fff; border-radius: 12px; padding: 30px; max-width: 500px;
+      width: 90%; max-height: 80vh; overflow-y: auto;
+    }
+    .modal__content h2 { margin-bottom: 20px; font-size: 1.3rem; }
+    .modal__content input, .modal__content textarea, .modal__content select {
+      width: 100%; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #ddd;
+      border-radius: 6px; font-size: 0.9rem; box-sizing: border-box;
+    }
+    .modal__content textarea { resize: vertical; }
+    .modal__actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
+    .modal__actions button { padding: 10px 25px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+    .modal__actions .btn-cancel { background: #eee; border: none; }
+    .modal__actions .btn-save { background: #c9a84c; color: #fff; border: none; }
+    .empty-state { text-align: center; padding: 60px 20px; color: #999; }
+    .badge-count { background: #c9a84c; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; margin-left: 5px; }
+  </style>
+</head>
+<body>
+
+<div class="admin-login" id="loginForm">
+  <h1>Вход в админ-панель</h1>
+  <div class="error" id="loginError"></div>
+  <input type="text" id="loginInput" placeholder="Логин" autocomplete="username">
+  <input type="password" id="passwordInput" placeholder="Пароль" autocomplete="current-password">
+  <button class="btn btn--primary btn--full" onclick="login()">Войти</button>
+</div>
+
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <h1>Админ-панель «Счастье»</h1>
+    <button onclick="logout()">Выйти</button>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="bookings" onclick="switchTab('bookings')">Заявки <span class="badge-count" id="bookingsCount">0</span></button>
+    <button class="admin-tab" data-tab="reviews" onclick="switchTab('reviews')">Отзывы</button>
+    <button class="admin-tab" data-tab="services" onclick="switchTab('services')">Услуги</button>
+  </div>
+
+  <div class="admin-section active" id="section-bookings">
+    <div id="bookingsList"></div>
+  </div>
+
+  <div class="admin-section" id="section-reviews">
+    <button class="btn-add" onclick="openReviewModal()">+ Добавить отзыв</button>
+    <div id="reviewsList"></div>
+  </div>
+
+  <div class="admin-section" id="section-services">
+    <div id="servicesList"></div>
+  </div>
+</div>
+
+<div class="modal" id="reviewModal">
+  <div class="modal__content">
+    <h2 id="reviewModalTitle">Добавить отзыв</h2>
+    <input type="text" id="reviewAuthor" placeholder="Автор">
+    <input type="text" id="reviewEvent" placeholder="Мероприятие (например: Свадьба, 30 гостей)">
+    <textarea id="reviewText" placeholder="Текст отзыва" rows="4"></textarea>
+    <select id="reviewStars">
+      <option value="5">5 звезд</option>
+      <option value="4">4 звезды</option>
+      <option value="3">3 звезды</option>
+    </select>
+    <div class="modal__actions">
+      <button class="btn-cancel" onclick="closeModal('reviewModal')">Отмена</button>
+      <button class="btn-save" onclick="saveReview()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="serviceModal">
+  <div class="modal__content">
+    <h2>Редактировать услугу</h2>
+    <input type="text" id="serviceName" placeholder="Название">
+    <input type="number" id="servicePrice" placeholder="Цена за человека">
+    <input type="text" id="serviceBadge" placeholder="Бейдж (например: Популярный)">
+    <textarea id="serviceFeatures" placeholder="Опции (каждая с новой строки)" rows="5"></textarea>
+    <label style="display:flex;align-items:center;gap:10px;margin-bottom:12px;cursor:pointer">
+      <input type="checkbox" id="serviceFeatured"> Выделить как популярный
+    </label>
+    <div class="modal__actions">
+      <button class="btn-cancel" onclick="closeModal('serviceModal')">Отмена</button>
+      <button class="btn-save" onclick="saveService()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:3001/api';
+let token = localStorage.getItem('admin_token');
+let editingReviewId = null;
+let editingServiceId = null;
+
+async function api(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const res = await fetch(API + path, { ...opts, headers });
+  if (res.status === 401) { logout(); return null; }
+  return res.json();
+}
+
+function login() {
+  const login = document.getElementById('loginInput').value;
+  const password = document.getElementById('passwordInput').value;
+  fetch(API + '/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ login, password }),
+  }).then(r => r.json()).then(data => {
+    if (data.token) {
+      token = data.token;
+      localStorage.setItem('admin_token', token);
+      showPanel();
+    } else {
+      document.getElementById('loginError').textContent = 'Неверный логин или пароль';
+    }
+  });
+}
+
+function logout() {
+  token = null;
+  localStorage.removeItem('admin_token');
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('loginForm').style.display = 'block';
+}
+
+function showPanel() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  loadBookings();
+  loadReviews();
+  loadServices();
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+}
+
+// ===== Bookings =====
+async function loadBookings() {
+  const data = await api('/bookings');
+  if (!data) return;
+  document.getElementById('bookingsCount').textContent = data.length;
+  const list = document.getElementById('bookingsList');
+  if (!data.length) { list.innerHTML = '<div class="empty-state">Новых заявок пока нет</div>'; return; }
+  list.innerHTML = data.map(b => `
+    <div class="admin-card">
+      <div class="admin-card__info">
+        <h3>${b.name}</h3>
+        <p>📞 ${b.phone}</p>
+        ${b.email ? `<p>✉️ ${b.email}</p>` : ''}
+        ${b.date ? `<p>📅 ${b.date}</p>` : ''}
+        ${b.guests ? `<p>👥 ${b.guests} гостей</p>` : ''}
+        ${b.message ? `<p>📝 ${b.message}</p>` : ''}
+        <span class="date">${b.created_at}</span>
+      </div>
+      <div class="admin-card__actions">
+        <button class="btn-danger" onclick="deleteBooking(${b.id})">Удалить</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function deleteBooking(id) {
+  if (!confirm('Удалить заявку?')) return;
+  await api('/bookings/' + id, { method: 'DELETE' });
+  loadBookings();
+}
+
+// ===== Reviews =====
+async function loadReviews() {
+  const data = await api('/reviews');
+  if (!data) return;
+  const list = document.getElementById('reviewsList');
+  if (!data.length) { list.innerHTML = '<div class="empty-state">Отзывов пока нет</div>'; return; }
+  list.innerHTML = data.map(r => `
+    <div class="admin-card">
+      <div class="admin-card__info">
+        <h3>${r.author} ${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</h3>
+        ${r.event ? `<p>${r.event}</p>` : ''}
+        <p>${r.text}</p>
+        <span class="date">${r.created_at}</span>
+      </div>
+      <div class="admin-card__actions">
+        <button class="btn-danger" onclick="deleteReview(${r.id})">Удалить</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function deleteReview(id) {
+  if (!confirm('Удалить отзыв?')) return;
+  await api('/reviews/' + id, { method: 'DELETE' });
+  loadReviews();
+}
+
+function openReviewModal(data) {
+  editingReviewId = data?.id || null;
+  document.getElementById('reviewModalTitle').textContent = data ? 'Редактировать отзыв' : 'Добавить отзыв';
+  document.getElementById('reviewAuthor').value = data?.author || '';
+  document.getElementById('reviewEvent').value = data?.event || '';
+  document.getElementById('reviewText').value = data?.text || '';
+  document.getElementById('reviewStars').value = data?.stars || 5;
+  document.getElementById('reviewModal').classList.add('open');
+}
+
+async function saveReview() {
+  const body = {
+    author: document.getElementById('reviewAuthor').value,
+    event: document.getElementById('reviewEvent').value,
+    text: document.getElementById('reviewText').value,
+    stars: parseInt(document.getElementById('reviewStars').value),
+  };
+  if (!body.author || !body.text) return alert('Заполните автора и текст');
+  await api('/reviews', { method: 'POST', body: JSON.stringify(body) });
+  closeModal('reviewModal');
+  loadReviews();
+}
+
+// ===== Services =====
+async function loadServices() {
+  const data = await api('/services');
+  if (!data) return;
+  const list = document.getElementById('servicesList');
+  if (!data.length) { list.innerHTML = '<div class="empty-state">Услуг пока нет</div>'; return; }
+  list.innerHTML = data.map(s => `
+    <div class="admin-card">
+      <div class="admin-card__info">
+        <h3>${s.name} — ${s.price} ₽/чел ${s.is_featured ? '⭐' : ''}</h3>
+        <p>Бейдж: ${s.badge || '—'}</p>
+        <p>Опции: ${JSON.parse(s.features || '[]').join(', ') || '—'}</p>
+      </div>
+      <div class="admin-card__actions">
+        <button class="btn-edit" onclick="openServiceModal(${s.id})">Редактировать</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function openServiceModal(id) {
+  const data = await api('/services');
+  if (!data) return;
+  const s = data.find(x => x.id === id);
+  if (!s) return;
+  editingServiceId = id;
+  document.getElementById('serviceName').value = s.name;
+  document.getElementById('servicePrice').value = s.price;
+  document.getElementById('serviceBadge').value = s.badge || '';
+  document.getElementById('serviceFeatures').value = JSON.parse(s.features || '[]').join('\n');
+  document.getElementById('serviceFeatured').checked = !!s.is_featured;
+  document.getElementById('serviceModal').classList.add('open');
+}
+
+async function saveService() {
+  const body = {
+    name: document.getElementById('serviceName').value,
+    price: parseInt(document.getElementById('servicePrice').value),
+    badge: document.getElementById('serviceBadge').value,
+    features: document.getElementById('serviceFeatures').value.split('\n').filter(Boolean),
+    is_featured: document.getElementById('serviceFeatured').checked,
+  };
+  if (!body.name || !body.price) return alert('Заполните название и цену');
+  await api('/services/' + editingServiceId, { method: 'PUT', body: JSON.stringify(body) });
+  closeModal('serviceModal');
+  loadServices();
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// Init
+if (token) showPanel();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('loginForm').style.display !== 'none') login();
+});
+</script>
+</body>
+</html>
