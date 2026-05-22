@@ -1,8 +1,13 @@
 {
+  "type": "module",
   "scripts": {
     "start": "cd backend && node server.js",
     "backend": "cd backend && node server.js",
     "frontend": "python3 -m http.server 9999"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "engines": {
     "node": ">=18"
